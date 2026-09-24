@@ -1,0 +1,22 @@
+services:
+  - type: web
+    name: savetunex-music-bot
+    runtime: docker
+    plan: free
+    region: frankfurt
+    healthCheckPath: /
+    envVars:
+      - key: TELEGRAM_BOT_TOKEN
+        sync: false
+      - key: ADMIN_ID
+        value: "5627504385,6718166903"
+      - key: ADMIN_USERNAME
+        value: "@xam1du11ayev"
+      - key: BOT_CAPTION
+        value: "👉 @SaveTuneX_Music_bot"
+      - key: MAX_FILE_SIZE_MB
+        value: "48"
+      - key: SEARCH_RESULTS_COUNT
+        value: "5"
+      - key: PORT
+        value: "10000"

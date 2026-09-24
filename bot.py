@@ -1491,8 +1491,37 @@ async def error_handler(update: object, context: ContextTypes.DEFAULT_TYPE) -> N
 # Application Initialization
 # ---------------------------------------------------------------------------
 
+def start_health_server(port: int) -> None:
+    """Start lightweight HTTP health server for cloud hosting (Render, Railway, etc.)."""
+    import threading
+    from http.server import HTTPServer, BaseHTTPRequestHandler
+
+    class HealthHandler(BaseHTTPRequestHandler):
+        def do_GET(self):
+            self.send_response(200)
+            self.send_header("Content-Type", "application/json")
+            self.end_headers()
+            self.wfile.write(b'{"status":"ok","service":"SaveTuneX_bot"}')
+
+        def log_message(self, format, *args):
+            pass  # Suppress noisy health check logs
+
+    try:
+        server = HTTPServer(("0.0.0.0", port), HealthHandler)
+        thread = threading.Thread(target=server.serve_forever, daemon=True)
+        thread.start()
+        logger.info(f"Health check HTTP server faol: port {port}")
+    except Exception as e:
+        logger.warning(f"Health server failed to start on port {port}: {e}")
+
+
 def main() -> None:
     init_db()
+
+    # If PORT env is present (Render, Railway, Heroku), start background health check server
+    port_env = os.getenv("PORT")
+    if port_env and port_env.isdigit():
+        start_health_server(int(port_env))
 
     token = os.getenv("TELEGRAM_BOT_TOKEN")
     if not token:
