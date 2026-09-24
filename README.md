@@ -1,6 +1,10 @@
 # 🎵 SaveTuneX Telegram Bot (Python)
 
+[![Deploy to Render](https://render.com/images/deploy-to-render-button.svg)](https://render.com/deploy?repo=https://github.com/m7promax2009/SaveTuneX-Telegram-Bot)
+
 Telegram orqali musiqa qidirish, MP3 yuklab olish, ijtimoiy tarmoqlardan (Instagram Reels, TikTok, YouTube Shorts) video yuklash, doira shaklidagi video xabarlarga aylantirish va Shazam orqali ovozdan musiqa topish boti.
+
+> **Bulutda 24/7 ishlash:** Ushbu bot Render.com yoki har qanday serverda Docker orqali ishlaydi. Kompyuteringiz yopiq yoki internetsiz bo'lsa ham, bot bulutda to'xtovsiz xizmat ko'rsatadi.
 
 ---
 
